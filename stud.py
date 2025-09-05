@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
-import statsmodels.api as sm
+#import statsmodels.api as sm
 
 
 st.title('STUDENT PERFORMANCE INDEX PREDICTOR')
@@ -26,14 +26,11 @@ st.dataframe(df)
 with open ('Lperformance.pkl', 'rb') as lm_pick:
     lme = pickle.load(lm_pick)
 
-with open('Pperformance.pkl', 'rb') as P_pick:
-    p_fit = pickle.load(P_pick)
 
-with open('performnce_scaler.pkl', 'rb') as scale:
-    scalee = pickle.load(scale)
+with open('label.pkl', 'rb') as label:
+    labeler = pickle.load(label)
 
-with open('dummy.pkl', 'rb') as dummy:
-    dummee = pickle.load(dummy)
+
 
 
 
@@ -59,10 +56,14 @@ if L_submitted:
         'Sleep_Hours' : [sleep],
         'Practiced_Questions' : [sample]
     })
-    features['Extracurricular_activities'] = pd.get_dummies(features['Extracurricular_activities'])
-    scaled = scalee.transform(features)
-    prediction = lme.predict(scaled)
-    st.write(f'Predicted Performnce Index:  {prediction[0]:.2f}')
+    #features['Extracurricular_activities'] = pd.get_dummies(features['Extracurricular_activities'])
+    reL = {}
+    for i in features.columns:
+        reL[i] = labeler.transform(features)
+
+    leR = pd.DataFrame(reL)
+    prediction = lme.predict(leR)
+    st.write(f'Predicted Performnce Index:  {prediction[0]}')
 
 
 
