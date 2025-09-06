@@ -50,7 +50,7 @@ if L_submitted:
         'Sample_Question_Papers_Practiced' : [sample]
     })
     prediction = piper.predict(features)
-    st.write(f'Predicted Performnce Index:  {prediction[0]}')
+    st.write(f'Predicted Performnce Index:  {prediction[0]:.2f}')
 
 
 
