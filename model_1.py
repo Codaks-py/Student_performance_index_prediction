@@ -1,11 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.linear_model import LinearRegression
-from sklearn.pipeline import Pipeline
-from sklearn.compose import ColumnTransformer
-#import statsmodels.api as sm
+import sklearn
 
 
 st.title('STUDENT PERFORMANCE INDEX PREDICTOR')
