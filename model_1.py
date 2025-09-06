@@ -23,15 +23,8 @@ st.dataframe(df)
 
 
 
-with open ('Lperformance.pkl', 'rb') as lm_pick:
-    lme = pickle.load(lm_pick)
-
-
-with open('label.pkl', 'rb') as label:
-    labeler = pickle.load(label)
-
-
-
+with open ('pipeline.pkl', 'rb') as pipe:
+    piper = pickle.load(pipe)
 
 
 
@@ -50,21 +43,14 @@ with st.form('Form'):
 
 if L_submitted:
     features = pd.DataFrame({
-        'Hours_studied' : [hours],
-        'Previous_Score' : [previous],
-        'Extracurricular_activities' : [extra],
+        'Hours_Studied' : [hours],
+        'Previous_Scores' : [previous],
+        'Extracurricular_Activities' : [extra],
         'Sleep_Hours' : [sleep],
-        'Practiced_Questions' : [sample]
+        'Sample_Question_Papers_Practiced' : [sample]
     })
-    features['Extracurricular_activities'] = labeler.transform(features['Extracurricular_activities'])
-    '''reL = {}
-    for i in features.columns:
-        reL[i] = labeler.transform(features[i])
-    '''
-    #sleR = pd.DataFrame(reL)
-    prediction = lme.predict(features)
+    prediction = piper.predict(features)
     st.write(f'Predicted Performnce Index:  {prediction[0]}')
-
 
 
 
